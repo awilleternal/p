@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+    <h1>Library Management System</h1>
+
+    <h2>Add a Book</h2>
+    <form id="addBookForm">
+        <input type="text" id="isbn" placeholder="ISBN" required>
+        <input type="text" id="title" placeholder="Title" required>
+        <input type="text" id="author" placeholder="Author" required>
+        <input type="number" id="year" placeholder="Year" required>
+        <button type="submit">Add Book</button>
+    </form>
+
+    <h2>Available Books</h2>
+    <ul id="availableBooks"></ul>
+
+    <h2>Borrow a Book</h2>
+    <input type="text" id="borrowIsbn" placeholder="Enter ISBN">
+    <button id="borrowBook">Borrow Book</button>
+
+    <h2>Return a Book</h2>
+    <input type="text" id="returnIsbn" placeholder="Enter ISBN">
+    <button id="returnBook">Return Book</button>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
