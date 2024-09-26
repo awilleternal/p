@@ -7,7 +7,7 @@ class LibraryManagementTestCase(unittest.TestCase):
     def setUp(self):
         self.app = app.test_client()
         self.app.testing = True
-        library.books = []  # Reset books
+        library.books = []
 
     def test_add_book(self):
         book_data = {
@@ -19,6 +19,10 @@ class LibraryManagementTestCase(unittest.TestCase):
         response = self.app.post('/books', data=json.dumps(book_data), content_type='application/json')
         self.assertEqual(response.status_code, 201)
         self.assertIn(b'Book added successfully', response.data)
+
+    def test_view_books(self):
+        response = self.app.get('/books')
+        self.assertEqual(response.status_code, 200)
 
 if __name__ == '__main__':
     unittest.main()

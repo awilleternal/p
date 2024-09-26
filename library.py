@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
@@ -21,6 +21,13 @@ class Library:
 
 library = Library()
 
+@app.route('/books', methods=['POST'])
+def add_book():
+    data = request.json
+    book = Book(data['isbn'], data['title'], data['author'], data['year'])
+    library.add_book(book)
+    return jsonify({'message': 'Book added successfully'}), 201
+
 @app.route('/books', methods=['GET'])
 def get_books():
     available_books = library.get_available_books()
@@ -30,13 +37,6 @@ def get_books():
         'author': book.author,
         'year': book.year
     } for book in available_books])
-
-@app.route('/books', methods=['POST'])
-def add_book():
-    data = request.json
-    book = Book(data['isbn'], data['title'], data['author'], data['year'])
-    library.add_book(book)
-    return jsonify({'message': 'Book added successfully'}), 201
 
 if __name__ == '__main__':
     app.run(debug=True)
